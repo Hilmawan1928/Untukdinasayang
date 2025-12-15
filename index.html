@@ -69,19 +69,21 @@
     <script src="js/matrix.js"></script>
 
     <!-- MUSIK -->
-    <audio id="bgm" src="music/love.mp3" loop></audio>
+    <audio id="bgm" loop>
+    <source src="music/love.mp3" type="audio/mpeg">
+</audio>
 
-    <script>
-        document.addEventListener("click", function () {
-            const music = document.getElementById("bgm");
-            music.volume = 0.6;
-            music.play();
-        }, { once: true });
-    </script>
+<script>
+    function playMusic() {
+        const music = document.getElementById("bgm");
+        music.volume = 0.6;
+        music.play();
+        document.removeEventListener("click", playMusic);
+        document.removeEventListener("touchstart", playMusic);
+    }
 
-    <div class="namebox" style="opacity: 0;">
-        <h1>Buat ❤️ Dina Alfamart</h1>
-    </div>
-
+    document.addEventListener("click", playMusic);
+    document.addEventListener("touchstart", playMusic);
+</script>
 </body>
 </html>
