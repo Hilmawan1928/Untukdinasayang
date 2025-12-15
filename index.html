@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Buat Dina</title>
+    <title>Untuk Dina</title>
     <meta name="language" content="zh-CN">
     <link rel="icon" type="image/x-icon"
         href="https://cdn.jsdelivr.net/gh/sun0225SUN/photos/img/20210715233345.png">
@@ -44,12 +44,13 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            width: 180px;
-            height: 240px;
-            border-radius: 20px;
+            width: 170px;
+            height: 230px;
+            border-radius: 18px;
             overflow: hidden;
             z-index: 10001;
             box-shadow: 0 0 20px rgba(255, 91, 165, 0.6);
+            pointer-events: none;
         }
 
         #photo-love img {
@@ -75,7 +76,7 @@
 
             100% {
                 opacity: 0;
-                transform: translateY(-120px) scale(1.8);
+                transform: translateY(-120px) scale(1.6);
             }
         }
 
@@ -99,18 +100,19 @@
 
 <body>
 
-    <canvas id="canvas-matrix" style="z-index:8888"></canvas>
-    <canvas class="canvas" style="z-index:9999"></canvas>
-    <canvas id="pinkboard" style="z-index:8888"></canvas>
+    <!-- ANIMASI ASLI (JANGAN DIUBAH) -->
+    <canvas id="canvas-matrix" style="z-index:1"></canvas>
+    <canvas class="canvas" style="z-index:2"></canvas>
+    <canvas id="pinkboard" style="z-index:3"></canvas>
 
-    <!-- SCRIPT CANVAS -->
+    <!-- SCRIPT ANIMASI -->
     <script src="js/index.js"></script>
     <script src="js/heart.js"></script>
     <script src="js/matrix.js"></script>
 
     <!-- TEKS -->
     <div class="namebox" style="opacity:0;">
-        <h1>Lovyou ❤️ Dina Alfa Rochima</h1>
+        <h1>Lovyu ❤️ Dina</h1>
     </div>
 
     <!-- FOTO -->
@@ -124,7 +126,7 @@
     </audio>
 
     <!-- TOMBOL PLAY -->
-    <div id="playMusicBtn">❤️ Tap untuk mulai ❤️</div>
+    <div id="playMusicBtn">❤️ Pencet by ❤️</div>
 
     <script>
         /* PLAY MUSIC */
@@ -152,7 +154,7 @@
             setTimeout(() => {
                 love.remove();
             }, 3000);
-        }, 400);
+        }, 450);
     </script>
 
 </body>
