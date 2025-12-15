@@ -1,8 +1,9 @@
+
 <!doctype html>
 <html lang="id">
 <head>
 <meta charset="utf-8">
-<title>Untuk Dina</title>
+<title>Untuk Dinaa</title>
 
 <style>
 html,body{
@@ -19,7 +20,7 @@ canvas{
     height:100%;
 }
 
-/* Foto Dina */
+/* FOTO */
 .photo-box{
     position:absolute;
     top:50%;
@@ -28,28 +29,28 @@ canvas{
     z-index:9000;
     opacity:0;
     animation:fadeIn 3s ease forwards;
-    animation-delay:6s;
+    animation-delay:7s;
 }
 .photo-box img{
     width:200px;
     height:200px;
     border-radius:50%;
     border:4px solid #ff5ba5;
-    box-shadow:0 0 25px #ff5ba5;
+    box-shadow:0 0 30px #ff5ba5;
 }
 
-/* Teks Love */
+/* TEKS */
 .namebox{
-    color:#ff5ba5;
     position:absolute;
-    z-index:9999;
-    top:70%;
+    top:72%;
     left:50%;
     transform:translate(-50%,-50%);
+    color:#ff5ba5;
+    font-family:'Comic Sans MS', cursive;
+    z-index:9999;
     opacity:0;
     animation:fadeIn 3s ease forwards;
-    animation-delay:7s;
-    font-family:'Comic Sans MS', cursive;
+    animation-delay:8s;
 }
 
 @keyframes fadeIn{
@@ -60,10 +61,11 @@ canvas{
 
 <body>
 
-<!-- CANVAS ANIMASI ASLI -->
+<!-- ⚠️ INI WAJIB ADA SESUAI SCRIPT LAMA -->
 <canvas id="canvas-matrix" style="z-index:1000"></canvas>
-<canvas class="canvas" style="z-index:2000"></canvas>
-<canvas id="pinkboard" style="z-index:3000"></canvas>
+<canvas id="canvas" style="z-index:2000"></canvas>
+<canvas class="canvas" style="z-index:3000"></canvas>
+<canvas id="pinkboard" style="z-index:4000"></canvas>
 
 <!-- FOTO -->
 <div class="photo-box">
@@ -80,7 +82,6 @@ canvas{
     <source src="love.mp3" type="audio/mpeg">
 </audio>
 
-<!-- SCRIPT MUSIK TANPA TOMBOL -->
 <script>
 const music = document.getElementById("bgm");
 
@@ -95,10 +96,10 @@ document.addEventListener("click", startMusic);
 document.addEventListener("touchstart", startMusic);
 </script>
 
-<!-- SCRIPT ANIMASI ASLI -->
+<!-- ⚠️ SCRIPT ASLI JANGAN DIUBAH URUTANNYA -->
 <script src="js/index.js"></script>
-<script src="js/heart.js"></script>
 <script src="js/matrix.js"></script>
+<script src="js/heart.js"></script>
 
 </body>
 </html>
