@@ -1,186 +1,104 @@
-
 <!doctype html>
-<html>
-
+<html lang="id">
 <head>
-    <meta charset="utf-8">
-    <title>Untuk Dina Sayang ❤️</title>
-    <meta name="language" content="zh-CN">
-    <link rel="icon" type="image/x-icon"
-        href="https://cdn.jsdelivr.net/gh/sun0225SUN/photos/img/20210715233345.png">
+<meta charset="utf-8">
+<title>Untuk Dina</title>
 
-    <style>
-        html, body {
-            margin: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background: #000;
-        }
+<style>
+html,body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#000;
+}
 
-        canvas {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
+canvas{
+    position:absolute;
+    width:100%;
+    height:100%;
+}
 
-        .namebox {
-            color: #ff5ba5;
-            position: absolute;
-            z-index: 9999;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            transition: 1s;
-        }
+/* Foto Dina */
+.photo-box{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    z-index:9000;
+    opacity:0;
+    animation:fadeIn 3s ease forwards;
+    animation-delay:6s;
+}
+.photo-box img{
+    width:200px;
+    height:200px;
+    border-radius:50%;
+    border:4px solid #ff5ba5;
+    box-shadow:0 0 25px #ff5ba5;
+}
 
-        .namebox h1 {
-            margin: 0;
-            font-family: 'Comic Sans MS', cursive;
-        }
+/* Teks Love */
+.namebox{
+    color:#ff5ba5;
+    position:absolute;
+    z-index:9999;
+    top:70%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    opacity:0;
+    animation:fadeIn 3s ease forwards;
+    animation-delay:7s;
+    font-family:'Comic Sans MS', cursive;
+}
 
-        /* FOTO */
-        #photo-love {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 170px;
-            height: 230px;
-            border-radius: 18px;
-            overflow: hidden;
-            z-index: 10000;
-            box-shadow: 0 0 20px rgba(255,91,165,.6);
-            pointer-events: none;
-        }
-
-        #photo-love img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* PLAY */
-        #playMusicBtn {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 20000;
-            padding: 14px 26px;
-            background: rgba(0,0,0,.65);
-            color: #ff5ba5;
-            border-radius: 30px;
-            font-size: 18px;
-            cursor: pointer;
-            font-family: Arial;
-        }
-    </style>
+@keyframes fadeIn{
+    to{opacity:1;}
+}
+</style>
 </head>
 
 <body>
 
-    <!-- ⚠️ STRUKTUR ASLI AWESOME-LOVE-CODE (JANGAN DIUBAH) -->
-    <canvas id="canvas-matrix"></canvas>
-    <canvas class="canvas"></canvas>
+<!-- CANVAS ANIMASI ASLI -->
+<canvas id="canvas-matrix" style="z-index:1000"></canvas>
+<canvas class="canvas" style="z-index:2000"></canvas>
+<canvas id="pinkboard" style="z-index:3000"></canvas>
 
-    <div class="overlay">
-        <div class="tabs">
-            <div class="tabs-labels">
-                <span class="tabs-label">Commands</span>
-                <span class="tabs-label">Info</span>
-                <span class="tabs-label">Share</span>
-            </div>
-            <div class="tabs-panels">
-                <ul class="tabs-panel commands"></ul>
-            </div>
-        </div>
-    </div>
+<!-- FOTO -->
+<div class="photo-box">
+    <img src="dina.jpg" alt="Dina">
+</div>
 
-    <canvas id="pinkboard"></canvas>
+<!-- TEKS -->
+<div class="namebox">
+    <h1>Love u Dina</h1>
+</div>
 
-    <!-- SCRIPT ASLI (WAJIB DI SINI) -->
-    <script src="js/index.js"></script>
-    <script src="js/heart.js"></script>
-    <script src="js/matrix.js"></script>
+<!-- AUDIO -->
+<audio id="bgm" loop playsinline>
+    <source src="love.mp3" type="audio/mpeg">
+</audio>
 
-    <div class="namebox" style="opacity:0;">
-        <h1>Wuv U ❤️ Dina</h1>
-    </div>
+<!-- SCRIPT MUSIK TANPA TOMBOL -->
+<script>
+const music = document.getElementById("bgm");
 
-    <!-- ===== TAMBAHAN AMAN ===== -->
+function startMusic(){
+    music.volume = 0.8;
+    music.play().catch(()=>{});
+    document.removeEventListener("click", startMusic);
+    document.removeEventListener("touchstart", startMusic);
+}
 
-    <div id="photo-love">
-        <img src="dina.jpg">
-    </div>
+document.addEventListener("click", startMusic);
+document.addEventListener("touchstart", startMusic);
+</script>
 
-    <audio id="bgm" loop playsinline>
-        <source src="love.mp3" type="audio/mpeg">
-    </audio>
-
-    <div id="playMusicBtn">❤️ Tap untuk mulai ❤️</div>
-
-    <canvas id="loveCanvas"></canvas>
-
-    <script>
-        /* MUSIC */
-        const music = document.getElementById("bgm");
-        const playBtn = document.getElementById("playMusicBtn");
-
-        playBtn.onclick = () => {
-            music.volume = 0.8;
-            music.play().then(() => {
-                playBtn.style.display = "none";
-            });
-        };
-
-        /* LOVE */
-        const c = document.getElementById("loveCanvas");
-        const ctx = c.getContext("2d");
-
-        function resize() {
-            c.width = innerWidth;
-            c.height = innerHeight;
-        }
-        resize();
-        addEventListener("resize", resize);
-
-        const hearts = [];
-
-        setInterval(() => {
-            const p = document.getElementById("photo-love").getBoundingClientRect();
-            hearts.push({
-                x: p.left + p.width / 2,
-                y: p.top,
-                s: Math.random() * 6 + 8,
-                a: 1
-            });
-        }, 450);
-
-        function drawHeart(h) {
-            ctx.save();
-            ctx.globalAlpha = h.a;
-            ctx.fillStyle = "#ff5ba5";
-            ctx.beginPath();
-            ctx.moveTo(h.x, h.y);
-            ctx.bezierCurveTo(h.x - h.s, h.y - h.s, h.x - h.s * 2, h.y + h.s, h.x, h.y + h.s * 2);
-            ctx.bezierCurveTo(h.x + h.s * 2, h.y + h.s, h.x + h.s, h.y - h.s, h.x, h.y);
-            ctx.fill();
-            ctx.restore();
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, c.width, c.height);
-            for (let i = hearts.length - 1; i >= 0; i--) {
-                const h = hearts[i];
-                h.y -= 0.7;
-                h.a -= 0.005;
-                drawHeart(h);
-                if (h.a <= 0) hearts.splice(i, 1);
-            }
-            requestAnimationFrame(animate);
-        }
-        animate();
-    </script>
+<!-- SCRIPT ANIMASI ASLI -->
+<script src="js/index.js"></script>
+<script src="js/heart.js"></script>
+<script src="js/matrix.js"></script>
 
 </body>
 </html>
