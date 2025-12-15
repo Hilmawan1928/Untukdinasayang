@@ -4,10 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Buat dina</title>
+    <title>Untuk Dina Sayang ❤️</title>
     <meta name="language" content="zh-CN">
-    <meta name="github" content="https://github.com/sun0225SUN/Awesome-Love-Code">
-    <meta name="describe" content="收集不易，您的star是我坚持的动力，同时也欢迎各位PR哦! ">
     <link rel="icon" type="image/x-icon"
         href="https://cdn.jsdelivr.net/gh/sun0225SUN/photos/img/20210715233345.png">
 
@@ -50,7 +48,7 @@
             height: 230px;
             border-radius: 18px;
             overflow: hidden;
-            z-index: 99999;
+            z-index: 10000;
             box-shadow: 0 0 20px rgba(255,91,165,.6);
             pointer-events: none;
         }
@@ -61,15 +59,15 @@
             object-fit: cover;
         }
 
-        /* PLAY BUTTON */
+        /* PLAY */
         #playMusicBtn {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            z-index: 100000;
+            z-index: 20000;
             padding: 14px 26px;
-            background: rgba(0,0,0,.6);
+            background: rgba(0,0,0,.65);
             color: #ff5ba5;
             border-radius: 30px;
             font-size: 18px;
@@ -81,9 +79,9 @@
 
 <body>
 
-    <!-- ===== STRUKTUR ASLI (WAJIB TETAP) ===== -->
-    <canvas id="canvas-matrix" style="z-index:8888"></canvas>
-    <canvas class="canvas" style="z-index:9999"></canvas>
+    <!-- ⚠️ STRUKTUR ASLI AWESOME-LOVE-CODE (JANGAN DIUBAH) -->
+    <canvas id="canvas-matrix"></canvas>
+    <canvas class="canvas"></canvas>
 
     <div class="overlay">
         <div class="tabs">
@@ -98,51 +96,44 @@
         </div>
     </div>
 
-    <canvas id="pinkboard" style="z-index:8888"></canvas>
+    <canvas id="pinkboard"></canvas>
 
-    <!-- SCRIPT ASLI -->
+    <!-- SCRIPT ASLI (WAJIB DI SINI) -->
     <script src="js/index.js"></script>
     <script src="js/heart.js"></script>
     <script src="js/matrix.js"></script>
 
     <div class="namebox" style="opacity:0;">
-        <h1>Lovyou Dina </h1>
+        <h1>Wuv U ❤️ Dina</h1>
     </div>
 
-    <!-- ===== TAMBAHAN ===== -->
+    <!-- ===== TAMBAHAN AMAN ===== -->
 
-    <!-- FOTO -->
     <div id="photo-love">
         <img src="dina.jpg">
     </div>
 
-    <!-- AUDIO -->
     <audio id="bgm" loop playsinline>
         <source src="love.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- PLAY -->
     <div id="playMusicBtn">❤️ Tap untuk mulai ❤️</div>
 
-    <!-- LOVE CANVAS -->
-    <canvas id="loveCanvas" style="z-index:99998"></canvas>
+    <canvas id="loveCanvas"></canvas>
 
     <script>
-        /* ===== MUSIC FIX ===== */
+        /* MUSIC */
         const music = document.getElementById("bgm");
         const playBtn = document.getElementById("playMusicBtn");
 
-        playBtn.addEventListener("click", () => {
+        playBtn.onclick = () => {
             music.volume = 0.8;
-            const p = music.play();
-            if (p !== undefined) {
-                p.then(() => {
-                    playBtn.style.display = "none";
-                }).catch(err => console.log(err));
-            }
-        });
+            music.play().then(() => {
+                playBtn.style.display = "none";
+            });
+        };
 
-        /* ===== LOVE CANVAS ===== */
+        /* LOVE */
         const c = document.getElementById("loveCanvas");
         const ctx = c.getContext("2d");
 
@@ -151,7 +142,7 @@
             c.height = innerHeight;
         }
         resize();
-        window.addEventListener("resize", resize);
+        addEventListener("resize", resize);
 
         const hearts = [];
 
