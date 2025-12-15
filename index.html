@@ -5,14 +5,13 @@
     <meta charset="utf-8">
     <title>Buat Dina</title>
     <meta name="language" content="zh-CN">
-    <meta name="github" content="https://github.com/sun0225SUN/Awesome-Love-Code">
-    <meta name="describe" content="收集不易，您的star是我坚持的动力，同时也欢迎各位PR哦! ">
-    <link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/sun0225SUN/photos/img/20210715233345.png">
+    <link rel="icon" type="image/x-icon"
+        href="https://cdn.jsdelivr.net/gh/sun0225SUN/photos/img/20210715233345.png">
 
     <style>
         html,
         body {
-            margin: 0px;
+            margin: 0;
             width: 100%;
             height: 100%;
             overflow: hidden;
@@ -36,8 +35,64 @@
         }
 
         .namebox h1 {
-            margin: 0 auto;
+            margin: 0;
             font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+
+        /* FOTO */
+        #photo-love {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 180px;
+            height: 240px;
+            border-radius: 20px;
+            overflow: hidden;
+            z-index: 10001;
+            box-shadow: 0 0 20px rgba(255, 91, 165, 0.6);
+        }
+
+        #photo-love img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* LOVE */
+        .love {
+            position: absolute;
+            color: #ff5ba5;
+            font-size: 20px;
+            animation: floatLove 3s linear forwards;
+            pointer-events: none;
+        }
+
+        @keyframes floatLove {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-120px) scale(1.8);
+            }
+        }
+
+        /* TOMBOL PLAY */
+        #playMusicBtn {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 100000;
+            padding: 15px 25px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #ff5ba5;
+            font-size: 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
         }
     </style>
 </head>
@@ -46,53 +101,59 @@
 
     <canvas id="canvas-matrix" style="z-index:8888"></canvas>
     <canvas class="canvas" style="z-index:9999"></canvas>
-
-    <div class="overlay">
-        <div class="tabs">
-            <div class="tabs-labels">
-                <span class="tabs-label">Commands</span>
-                <span class="tabs-label">Info</span>
-                <span class="tabs-label">Share</span>
-            </div>
-            <div class="tabs-panels">
-                <ul class="tabs-panel commands"></ul>
-            </div>
-        </div>
-    </div>
-
     <canvas id="pinkboard" style="z-index:8888"></canvas>
 
-    <!-- SCRIPT ANIMASI -->
+    <!-- SCRIPT CANVAS -->
     <script src="js/index.js"></script>
     <script src="js/heart.js"></script>
     <script src="js/matrix.js"></script>
 
-    <!-- AUDIO (love.mp3 harus sefolder dengan index.html) -->
+    <!-- TEKS -->
+    <div class="namebox" style="opacity:0;">
+        <h1>Lovyou ❤️ Dina Alfa Rochima</h1>
+    </div>
+
+    <!-- FOTO -->
+    <div id="photo-love">
+        <img src="dina.jpg" alt="Dina">
+    </div>
+
+    <!-- AUDIO -->
     <audio id="bgm" preload="auto" loop playsinline>
-    <source src="love.mp3" type="audio/mpeg">
-</audio>
+        <source src="love.mp3" type="audio/mpeg">
+    </audio>
 
-<script>
-    const music = document.getElementById("bgm");
+    <!-- TOMBOL PLAY -->
+    <div id="playMusicBtn">❤️ Tap untuk mulai ❤️</div>
 
-    function startMusic() {
-        music.volume = 0.8;
-        music.play().then(() => {
-            console.log("Music playing");
-        }).catch(err => {
-            console.log("Play failed:", err);
+    <script>
+        /* PLAY MUSIC */
+        const music = document.getElementById("bgm");
+        const btn = document.getElementById("playMusicBtn");
+
+        btn.addEventListener("click", () => {
+            music.volume = 0.8;
+            music.play().then(() => {
+                btn.style.display = "none";
+            });
         });
 
-        window.removeEventListener("pointerdown", startMusic);
-        window.removeEventListener("touchstart", startMusic);
-    }
+        /* LOVE DARI FOTO */
+        const photoBox = document.getElementById("photo-love");
 
-    window.addEventListener("pointerdown", startMusic);
-    window.addEventListener("touchstart", startMusic);
-</script>
-    <div class="namebox" style="opacity: 0;">
-        <h1>Buat ❤️Dina Alfamart</h1>
-    </div>
+        setInterval(() => {
+            const love = document.createElement("div");
+            love.className = "love";
+            love.innerHTML = "❤️";
+            love.style.left = Math.random() * 120 + "px";
+            love.style.bottom = "10px";
+            photoBox.appendChild(love);
+
+            setTimeout(() => {
+                love.remove();
+            }, 3000);
+        }, 400);
+    </script>
 
 </body>
 </html>
