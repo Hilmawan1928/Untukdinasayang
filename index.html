@@ -68,23 +68,28 @@
     <script src="js/matrix.js"></script>
 
     <!-- AUDIO (love.mp3 harus sefolder dengan index.html) -->
-    <audio id="bgm" loop>
-        <source src="love.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="bgm" preload="auto" loop playsinline>
+    <source src="love.mp3" type="audio/mpeg">
+</audio>
 
-    <script>
-        function playMusic() {
-            const music = document.getElementById("bgm");
-            music.volume = 0.6;
-            music.play().catch(() => {});
-            document.removeEventListener("click", playMusic);
-            document.removeEventListener("touchstart", playMusic);
-        }
+<script>
+    const music = document.getElementById("bgm");
 
-        document.addEventListener("click", playMusic);
-        document.addEventListener("touchstart", playMusic);
-    </script>
+    function startMusic() {
+        music.volume = 0.8;
+        music.play().then(() => {
+            console.log("Music playing");
+        }).catch(err => {
+            console.log("Play failed:", err);
+        });
 
+        window.removeEventListener("pointerdown", startMusic);
+        window.removeEventListener("touchstart", startMusic);
+    }
+
+    window.addEventListener("pointerdown", startMusic);
+    window.addEventListener("touchstart", startMusic);
+</script>
     <div class="namebox" style="opacity: 0;">
         <h1>Buat ❤️Dina Alfamart</h1>
     </div>
