@@ -70,14 +70,14 @@
 
     <!-- MUSIK -->
     <audio id="bgm" loop>
-    <source src="music/love.mp3" type="audio/mpeg">
+    <source src="love.mp3" type="audio/mpeg">
 </audio>
 
 <script>
     function playMusic() {
         const music = document.getElementById("bgm");
         music.volume = 0.6;
-        music.play();
+        music.play().catch(() => {});
         document.removeEventListener("click", playMusic);
         document.removeEventListener("touchstart", playMusic);
     }
